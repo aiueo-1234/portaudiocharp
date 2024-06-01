@@ -1,0 +1,2 @@
+#PortAudioCsharp
+csbindgenを用いてPortAudioのFFIコードを自動生成
