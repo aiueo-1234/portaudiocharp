@@ -9,6 +9,7 @@ fn main() {
 
     bindgen::Builder::default()
         .header("portaudio/include/pa_linux_alsa.h")
+        .allowlist_function("PaAlsa_.*")
         .generate()
         .unwrap()
         .write_to_file("src/pa_linux_alsa.rs")
@@ -16,6 +17,7 @@ fn main() {
 
     bindgen::Builder::default()
         .header("portaudio/include/pa_linux_pulseaudio.h")
+        .allowlist_function("PaPulseAudio_.*")
         .generate()
         .unwrap()
         .write_to_file("src/pa_linux_pulseaudio.rs")
