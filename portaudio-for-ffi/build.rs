@@ -27,7 +27,10 @@ fn main() {
     csbindgen::Builder::default()
         .input_bindgen_file("src/portaudio.rs") // read from bindgen generated code
         .rust_file_header("use super::portaudio::*;") // import bindgen generated modules(struct/method)
+        //.rust_method_prefix("")
         .csharp_entry_point_prefix("") // adjust same signature of rust method and C# EntryPoint
+        .csharp_namespace("PortAudio.Unsafe")
+        .csharp_class_name("PortAudio")
         .csharp_dll_name("libportaudio")
         .generate_to_file("src/portaudio_ffi.rs", "dotnet/NativeMethods.portaudio.g.cs")
         .unwrap();
@@ -35,7 +38,10 @@ fn main() {
     csbindgen::Builder::default()
         .input_bindgen_file("src/pa_linux_alsa.rs") // read from bindgen generated code
         .rust_file_header("use super::pa_linux_alsa::*;") // import bindgen generated modules(struct/method)
+        //.rust_method_prefix("")
         .csharp_entry_point_prefix("") // adjust same signature of rust method and C# EntryPoint
+        .csharp_namespace("PortAudio.Unsafe.Linux")
+        .csharp_class_name("Alsa")
         .csharp_dll_name("libportaudio")
         .generate_to_file("src/pa_linux_alsa_ffi.rs", "dotnet/NativeMethods.pa_linux_alsa.g.cs")
         .unwrap();
@@ -43,7 +49,10 @@ fn main() {
     csbindgen::Builder::default()
         .input_bindgen_file("src/pa_linux_pulseaudio.rs") // read from bindgen generated code
         .rust_file_header("use super::pa_linux_pulseaudio::*;") // import bindgen generated modules(struct/method)
+        //.rust_method_prefix("")
         .csharp_entry_point_prefix("") // adjust same signature of rust method and C# EntryPoint
+        .csharp_namespace("PortAudio.Unsafe.Linux")
+        .csharp_class_name("PulsAudio")
         .csharp_dll_name("libportaudio")
         .generate_to_file("src/pa_linux_pulseaudio_ffi.rs", "dotnet/NativeMethods.pa_linux_pulseaudio.g.cs")
         .unwrap();

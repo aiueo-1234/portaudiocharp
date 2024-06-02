@@ -8,9 +8,9 @@ using System;
 using System.Runtime.InteropServices;
 
 
-namespace CsBindgen
+namespace PortAudio.Unsafe
 {
-    internal static unsafe partial class NativeMethods
+    internal static unsafe partial class PortAudio
     {
         const string __DllName = "libportaudio";
 
