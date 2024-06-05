@@ -2,29 +2,9 @@
 
 #[doc = " Error codes returned by PortAudio functions.\nNote that with the exception of paNoError, all PaErrorCodes are negative."]
 pub type PaError = ::std::os::raw::c_int;
-pub const PaHostApiTypeId_paInDevelopment: PaHostApiTypeId = 0;
-pub const PaHostApiTypeId_paDirectSound: PaHostApiTypeId = 1;
-pub const PaHostApiTypeId_paMME: PaHostApiTypeId = 2;
-pub const PaHostApiTypeId_paASIO: PaHostApiTypeId = 3;
-pub const PaHostApiTypeId_paSoundManager: PaHostApiTypeId = 4;
-pub const PaHostApiTypeId_paCoreAudio: PaHostApiTypeId = 5;
-pub const PaHostApiTypeId_paOSS: PaHostApiTypeId = 7;
-pub const PaHostApiTypeId_paALSA: PaHostApiTypeId = 8;
-pub const PaHostApiTypeId_paAL: PaHostApiTypeId = 9;
-pub const PaHostApiTypeId_paBeOS: PaHostApiTypeId = 10;
-pub const PaHostApiTypeId_paWDMKS: PaHostApiTypeId = 11;
-pub const PaHostApiTypeId_paJACK: PaHostApiTypeId = 12;
-pub const PaHostApiTypeId_paWASAPI: PaHostApiTypeId = 13;
-pub const PaHostApiTypeId_paAudioScienceHPI: PaHostApiTypeId = 14;
-pub const PaHostApiTypeId_paAudioIO: PaHostApiTypeId = 15;
-pub const PaHostApiTypeId_paPulseAudio: PaHostApiTypeId = 16;
-pub const PaHostApiTypeId_paSndio: PaHostApiTypeId = 17;
-#[doc = " Unchanging unique identifiers for each supported host API. This type\nis used in the PaHostApiInfo structure. The values are guaranteed to be\nunique and to never change, thus allowing code to be written that\nconditionally uses host API specific extensions.\n\nNew type ids will be allocated when support for a host API reaches\n\"public alpha\" status, prior to that developers should use the\npaInDevelopment type id.\n\n@see PaHostApiInfo"]
-pub type PaHostApiTypeId = ::std::os::raw::c_uint;
 #[doc = "A single PaStream can provide multiple channels of real-time\nstreaming audio input and output to a client application. A stream\nprovides access to audio hardware represented by one or more\nPaDevices. Depending on the underlying Host API, it may be possible\nto open multiple streams using the same device, however this behavior\nis implementation defined. Portable applications should assume that\na PaDevice may be simultaneously used by at most one PaStream.\n\nPointers to PaStream objects are passed between PortAudio functions that\noperate on streams.\n\n@see Pa_OpenStream, Pa_OpenDefaultStream, Pa_OpenDefaultStream, Pa_CloseStream,\nPa_StartStream, Pa_StopStream, Pa_AbortStream, Pa_IsStreamActive,\nPa_GetStreamTime, Pa_GetStreamCpuLoad"]
 pub type PaStream = ::std::os::raw::c_void;
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
 pub struct PaAlsaStreamInfo {
     pub size: ::std::os::raw::c_ulong,
     pub hostApiType: PaHostApiTypeId,

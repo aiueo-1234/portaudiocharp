@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace PortAudio.Unsafe
 {
-    internal static unsafe partial class PortAudio
+    internal static unsafe partial class NativeMethods
     {
         const string __DllName = "libportaudio";
 
@@ -54,7 +54,7 @@ namespace PortAudio.Unsafe
 
         /// <summary>Convert a static host API unique identifier, into a runtimehost API index.@param type A unique host API identifier belonging to the PaHostApiTypeIdenumeration.@return A valid PaHostApiIndex ranging from 0 to (Pa_GetHostApiCount()-1) or,a PaErrorCode (which are always negative) if PortAudio is not initializedor an error is encountered.The paHostApiNotFound error code indicates that the host API specified by thetype parameter is not available.@see PaHostApiTypeId</summary>
         [DllImport(__DllName, EntryPoint = "Pa_HostApiTypeIdToHostApiIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int Pa_HostApiTypeIdToHostApiIndex(uint type_);
+        public static extern int Pa_HostApiTypeIdToHostApiIndex(PaHostApiTypeId type_);
 
         /// <summary>Convert a host-API-specific device index to standard PortAudio device index.This function may be used in conjunction with the deviceCount field ofPaHostApiInfo to enumerate all devices for the specified host API.@param hostApi A valid host API index ranging from 0 to (Pa_GetHostApiCount()-1)@param hostApiDeviceIndex A valid per-host device index in the range0 to (Pa_GetHostApiInfo(hostApi)-&gt;deviceCount-1)@return A non-negative PaDeviceIndex ranging from 0 to (Pa_GetDeviceCount()-1)or, a PaErrorCode (which are always negative) if PortAudio is not initializedor an error is encountered.A paInvalidHostApi error code indicates that the host API index specified bythe hostApi parameter is out of range.A paInvalidDevice error code indicates that the hostApiDeviceIndex parameteris out of range.@see PaHostApiInfo</summary>
         [DllImport(__DllName, EntryPoint = "Pa_HostApiDeviceIndexToDeviceIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -173,7 +173,7 @@ namespace PortAudio.Unsafe
     internal unsafe partial struct PaHostApiInfo
     {
         public int structVersion;
-        public uint type_;
+        public PaHostApiTypeId type_;
         public byte* name;
         public int deviceCount;
         public int defaultInputDevice;
@@ -183,7 +183,7 @@ namespace PortAudio.Unsafe
     [StructLayout(LayoutKind.Sequential)]
     internal unsafe partial struct PaHostErrorInfo
     {
-        public uint hostApiType;
+        public PaHostApiTypeId hostApiType;
         public CLong errorCode;
         public byte* errorText;
     }
@@ -230,6 +230,62 @@ namespace PortAudio.Unsafe
         public double sampleRate;
     }
 
+
+    internal enum PaErrorCode : int
+    {
+        paNoError = 0,
+        paNotInitialized = -10000,
+        paUnanticipatedHostError = -9999,
+        paInvalidChannelCount = -9998,
+        paInvalidSampleRate = -9997,
+        paInvalidDevice = -9996,
+        paInvalidFlag = -9995,
+        paSampleFormatNotSupported = -9994,
+        paBadIODeviceCombination = -9993,
+        paInsufficientMemory = -9992,
+        paBufferTooBig = -9991,
+        paBufferTooSmall = -9990,
+        paNullCallback = -9989,
+        paBadStreamPtr = -9988,
+        paTimedOut = -9987,
+        paInternalError = -9986,
+        paDeviceUnavailable = -9985,
+        paIncompatibleHostApiSpecificStreamInfo = -9984,
+        paStreamIsStopped = -9983,
+        paStreamIsNotStopped = -9982,
+        paInputOverflowed = -9981,
+        paOutputUnderflowed = -9980,
+        paHostApiNotFound = -9979,
+        paInvalidHostApi = -9978,
+        paCanNotReadFromACallbackStream = -9977,
+        paCanNotWriteToACallbackStream = -9976,
+        paCanNotReadFromAnOutputOnlyStream = -9975,
+        paCanNotWriteToAnInputOnlyStream = -9974,
+        paIncompatibleStreamHostApi = -9973,
+        paBadBufferPtr = -9972,
+        paCanNotInitializeRecursively = -9971,
+    }
+
+    internal enum PaHostApiTypeId : uint
+    {
+        paInDevelopment = 0,
+        paDirectSound = 1,
+        paMME = 2,
+        paASIO = 3,
+        paSoundManager = 4,
+        paCoreAudio = 5,
+        paOSS = 7,
+        paALSA = 8,
+        paAL = 9,
+        paBeOS = 10,
+        paWDMKS = 11,
+        paJACK = 12,
+        paWASAPI = 13,
+        paAudioScienceHPI = 14,
+        paAudioIO = 15,
+        paPulseAudio = 16,
+        paSndio = 17,
+    }
 
 
 }

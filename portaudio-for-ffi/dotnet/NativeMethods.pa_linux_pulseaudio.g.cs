@@ -6,11 +6,12 @@
 #pragma warning disable CS8981
 using System;
 using System.Runtime.InteropServices;
+using PortAudio.Unsafe;
 
 
 namespace PortAudio.Unsafe.Linux
 {
-    internal static unsafe partial class PulsAudio
+    internal static unsafe partial class NativeMethodsPulsAudio
     {
         const string __DllName = "libportaudio";
 

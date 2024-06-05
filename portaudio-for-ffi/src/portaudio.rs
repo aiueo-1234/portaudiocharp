@@ -93,38 +93,41 @@ extern "C" {
 }
 #[doc = " Error codes returned by PortAudio functions.\nNote that with the exception of paNoError, all PaErrorCodes are negative."]
 pub type PaError = ::std::os::raw::c_int;
-pub const PaErrorCode_paNoError: PaErrorCode = 0;
-pub const PaErrorCode_paNotInitialized: PaErrorCode = -10000;
-pub const PaErrorCode_paUnanticipatedHostError: PaErrorCode = -9999;
-pub const PaErrorCode_paInvalidChannelCount: PaErrorCode = -9998;
-pub const PaErrorCode_paInvalidSampleRate: PaErrorCode = -9997;
-pub const PaErrorCode_paInvalidDevice: PaErrorCode = -9996;
-pub const PaErrorCode_paInvalidFlag: PaErrorCode = -9995;
-pub const PaErrorCode_paSampleFormatNotSupported: PaErrorCode = -9994;
-pub const PaErrorCode_paBadIODeviceCombination: PaErrorCode = -9993;
-pub const PaErrorCode_paInsufficientMemory: PaErrorCode = -9992;
-pub const PaErrorCode_paBufferTooBig: PaErrorCode = -9991;
-pub const PaErrorCode_paBufferTooSmall: PaErrorCode = -9990;
-pub const PaErrorCode_paNullCallback: PaErrorCode = -9989;
-pub const PaErrorCode_paBadStreamPtr: PaErrorCode = -9988;
-pub const PaErrorCode_paTimedOut: PaErrorCode = -9987;
-pub const PaErrorCode_paInternalError: PaErrorCode = -9986;
-pub const PaErrorCode_paDeviceUnavailable: PaErrorCode = -9985;
-pub const PaErrorCode_paIncompatibleHostApiSpecificStreamInfo: PaErrorCode = -9984;
-pub const PaErrorCode_paStreamIsStopped: PaErrorCode = -9983;
-pub const PaErrorCode_paStreamIsNotStopped: PaErrorCode = -9982;
-pub const PaErrorCode_paInputOverflowed: PaErrorCode = -9981;
-pub const PaErrorCode_paOutputUnderflowed: PaErrorCode = -9980;
-pub const PaErrorCode_paHostApiNotFound: PaErrorCode = -9979;
-pub const PaErrorCode_paInvalidHostApi: PaErrorCode = -9978;
-pub const PaErrorCode_paCanNotReadFromACallbackStream: PaErrorCode = -9977;
-pub const PaErrorCode_paCanNotWriteToACallbackStream: PaErrorCode = -9976;
-pub const PaErrorCode_paCanNotReadFromAnOutputOnlyStream: PaErrorCode = -9975;
-pub const PaErrorCode_paCanNotWriteToAnInputOnlyStream: PaErrorCode = -9974;
-pub const PaErrorCode_paIncompatibleStreamHostApi: PaErrorCode = -9973;
-pub const PaErrorCode_paBadBufferPtr: PaErrorCode = -9972;
-pub const PaErrorCode_paCanNotInitializeRecursively: PaErrorCode = -9971;
-pub type PaErrorCode = ::std::os::raw::c_int;
+#[repr(i32)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum PaErrorCode {
+    paNoError = 0,
+    paNotInitialized = -10000,
+    paUnanticipatedHostError = -9999,
+    paInvalidChannelCount = -9998,
+    paInvalidSampleRate = -9997,
+    paInvalidDevice = -9996,
+    paInvalidFlag = -9995,
+    paSampleFormatNotSupported = -9994,
+    paBadIODeviceCombination = -9993,
+    paInsufficientMemory = -9992,
+    paBufferTooBig = -9991,
+    paBufferTooSmall = -9990,
+    paNullCallback = -9989,
+    paBadStreamPtr = -9988,
+    paTimedOut = -9987,
+    paInternalError = -9986,
+    paDeviceUnavailable = -9985,
+    paIncompatibleHostApiSpecificStreamInfo = -9984,
+    paStreamIsStopped = -9983,
+    paStreamIsNotStopped = -9982,
+    paInputOverflowed = -9981,
+    paOutputUnderflowed = -9980,
+    paHostApiNotFound = -9979,
+    paInvalidHostApi = -9978,
+    paCanNotReadFromACallbackStream = -9977,
+    paCanNotWriteToACallbackStream = -9976,
+    paCanNotReadFromAnOutputOnlyStream = -9975,
+    paCanNotWriteToAnInputOnlyStream = -9974,
+    paIncompatibleStreamHostApi = -9973,
+    paBadBufferPtr = -9972,
+    paCanNotInitializeRecursively = -9971,
+}
 extern "C" {
     #[doc = " Translate the supplied PortAudio error code into a human readable\nmessage."]
     pub fn Pa_GetErrorText(errorCode: PaError) -> *const ::std::os::raw::c_char;
@@ -149,25 +152,28 @@ extern "C" {
     #[doc = " Retrieve the index of the default host API. The default host API will be\nthe lowest common denominator host API on the current platform and is\nunlikely to provide the best performance.\n\n@return A non-negative value ranging from 0 to (Pa_GetHostApiCount()-1)\nindicating the default host API index or, a PaErrorCode (which are always\nnegative) if PortAudio is not initialized or an error is encountered."]
     pub fn Pa_GetDefaultHostApi() -> PaHostApiIndex;
 }
-pub const PaHostApiTypeId_paInDevelopment: PaHostApiTypeId = 0;
-pub const PaHostApiTypeId_paDirectSound: PaHostApiTypeId = 1;
-pub const PaHostApiTypeId_paMME: PaHostApiTypeId = 2;
-pub const PaHostApiTypeId_paASIO: PaHostApiTypeId = 3;
-pub const PaHostApiTypeId_paSoundManager: PaHostApiTypeId = 4;
-pub const PaHostApiTypeId_paCoreAudio: PaHostApiTypeId = 5;
-pub const PaHostApiTypeId_paOSS: PaHostApiTypeId = 7;
-pub const PaHostApiTypeId_paALSA: PaHostApiTypeId = 8;
-pub const PaHostApiTypeId_paAL: PaHostApiTypeId = 9;
-pub const PaHostApiTypeId_paBeOS: PaHostApiTypeId = 10;
-pub const PaHostApiTypeId_paWDMKS: PaHostApiTypeId = 11;
-pub const PaHostApiTypeId_paJACK: PaHostApiTypeId = 12;
-pub const PaHostApiTypeId_paWASAPI: PaHostApiTypeId = 13;
-pub const PaHostApiTypeId_paAudioScienceHPI: PaHostApiTypeId = 14;
-pub const PaHostApiTypeId_paAudioIO: PaHostApiTypeId = 15;
-pub const PaHostApiTypeId_paPulseAudio: PaHostApiTypeId = 16;
-pub const PaHostApiTypeId_paSndio: PaHostApiTypeId = 17;
+#[repr(u32)]
 #[doc = " Unchanging unique identifiers for each supported host API. This type\nis used in the PaHostApiInfo structure. The values are guaranteed to be\nunique and to never change, thus allowing code to be written that\nconditionally uses host API specific extensions.\n\nNew type ids will be allocated when support for a host API reaches\n\"public alpha\" status, prior to that developers should use the\npaInDevelopment type id.\n\n@see PaHostApiInfo"]
-pub type PaHostApiTypeId = ::std::os::raw::c_uint;
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+pub enum PaHostApiTypeId {
+    paInDevelopment = 0,
+    paDirectSound = 1,
+    paMME = 2,
+    paASIO = 3,
+    paSoundManager = 4,
+    paCoreAudio = 5,
+    paOSS = 7,
+    paALSA = 8,
+    paAL = 9,
+    paBeOS = 10,
+    paWDMKS = 11,
+    paJACK = 12,
+    paWASAPI = 13,
+    paAudioScienceHPI = 14,
+    paAudioIO = 15,
+    paPulseAudio = 16,
+    paSndio = 17,
+}
 #[doc = " A structure containing information about a particular host API."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]

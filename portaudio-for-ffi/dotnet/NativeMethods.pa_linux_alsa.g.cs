@@ -6,11 +6,12 @@
 #pragma warning disable CS8981
 using System;
 using System.Runtime.InteropServices;
+using PortAudio.Unsafe;
 
 
 namespace PortAudio.Unsafe.Linux
 {
-    internal static unsafe partial class Alsa
+    internal static unsafe partial class NativeMethodsAlsa
     {
         const string __DllName = "libportaudio";
 
@@ -51,7 +52,7 @@ namespace PortAudio.Unsafe.Linux
     internal unsafe partial struct PaAlsaStreamInfo
     {
         public CULong size;
-        public uint hostApiType;
+        public PaHostApiTypeId hostApiType;
         public CULong version;
         public byte* deviceString;
     }
