@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace PortAudio.Unsafe
 {
-    internal static unsafe partial class NativeMethods
+    public static unsafe partial class NativeMethods
     {
         const string __DllName = "libportaudio";
 
@@ -160,7 +160,7 @@ namespace PortAudio.Unsafe
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct PaVersionInfo
+    public unsafe partial struct PaVersionInfo
     {
         public int versionMajor;
         public int versionMinor;
@@ -170,7 +170,7 @@ namespace PortAudio.Unsafe
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct PaHostApiInfo
+    public unsafe partial struct PaHostApiInfo
     {
         public int structVersion;
         public PaHostApiTypeId type_;
@@ -181,7 +181,7 @@ namespace PortAudio.Unsafe
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct PaHostErrorInfo
+    public unsafe partial struct PaHostErrorInfo
     {
         public PaHostApiTypeId hostApiType;
         public CLong errorCode;
@@ -189,7 +189,7 @@ namespace PortAudio.Unsafe
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct PaDeviceInfo
+    public unsafe partial struct PaDeviceInfo
     {
         public int structVersion;
         public byte* name;
@@ -204,7 +204,7 @@ namespace PortAudio.Unsafe
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct PaStreamParameters
+    public unsafe partial struct PaStreamParameters
     {
         public int device;
         public int channelCount;
@@ -214,7 +214,7 @@ namespace PortAudio.Unsafe
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct PaStreamCallbackTimeInfo
+    public unsafe partial struct PaStreamCallbackTimeInfo
     {
         public double inputBufferAdcTime;
         public double currentTime;
@@ -222,7 +222,7 @@ namespace PortAudio.Unsafe
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct PaStreamInfo
+    public unsafe partial struct PaStreamInfo
     {
         public int structVersion;
         public double inputLatency;
@@ -231,7 +231,7 @@ namespace PortAudio.Unsafe
     }
 
 
-    internal enum PaErrorCode : int
+    public enum PaErrorCode : int
     {
         paNoError = 0,
         paNotInitialized = -10000,
@@ -266,7 +266,7 @@ namespace PortAudio.Unsafe
         paCanNotInitializeRecursively = -9971,
     }
 
-    internal enum PaHostApiTypeId : uint
+    public enum PaHostApiTypeId : uint
     {
         paInDevelopment = 0,
         paDirectSound = 1,

@@ -37,6 +37,7 @@ fn main() {
         .csharp_namespace("PortAudio.Unsafe")
         .csharp_class_name("NativeMethods")
         .csharp_dll_name("libportaudio")
+        .csharp_class_accessibility("public")
         .generate_to_file("src/portaudio_ffi.rs", "dotnet/NativeMethods.portaudio.g.cs")
         .unwrap();
 
@@ -49,6 +50,7 @@ fn main() {
         .csharp_class_name("NativeMethodsAlsa")
         .csharp_import_namespace("PortAudio.Unsafe")
         .csharp_dll_name("libportaudio")
+        .csharp_class_accessibility("public")
         .generate_to_file("src/pa_linux_alsa_ffi.rs", "dotnet/NativeMethods.pa_linux_alsa.g.cs")
         .unwrap();
 
@@ -61,6 +63,7 @@ fn main() {
         .csharp_class_name("NativeMethodsPulsAudio")
         .csharp_import_namespace("PortAudio.Unsafe")
         .csharp_dll_name("libportaudio")
+        .csharp_class_accessibility("public")
         .generate_to_file("src/pa_linux_pulseaudio_ffi.rs", "dotnet/NativeMethods.pa_linux_pulseaudio.g.cs")
         .unwrap();
 }

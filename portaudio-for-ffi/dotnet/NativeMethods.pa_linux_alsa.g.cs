@@ -11,7 +11,7 @@ using PortAudio.Unsafe;
 
 namespace PortAudio.Unsafe.Linux
 {
-    internal static unsafe partial class NativeMethodsAlsa
+    public static unsafe partial class NativeMethodsAlsa
     {
         const string __DllName = "libportaudio";
 
@@ -49,7 +49,7 @@ namespace PortAudio.Unsafe.Linux
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct PaAlsaStreamInfo
+    public unsafe partial struct PaAlsaStreamInfo
     {
         public CULong size;
         public PaHostApiTypeId hostApiType;

@@ -11,7 +11,7 @@ using PortAudio.Unsafe;
 
 namespace PortAudio.Unsafe.Linux
 {
-    internal static unsafe partial class NativeMethodsPulsAudio
+    public static unsafe partial class NativeMethodsPulsAudio
     {
         const string __DllName = "libportaudio";
 
