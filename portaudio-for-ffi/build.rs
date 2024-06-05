@@ -36,9 +36,9 @@ fn main() {
         .csharp_entry_point_prefix("") // adjust same signature of rust method and C# EntryPoint
         .csharp_namespace("PortAudio.Unsafe")
         .csharp_class_name("NativeMethods")
-        .csharp_dll_name("libportaudio")
+        .csharp_dll_name("portaudio")
         .csharp_class_accessibility("public")
-        .generate_to_file("src/portaudio_ffi.rs", "dotnet/NativeMethods.portaudio.g.cs")
+        .generate_to_file("src/portaudio_ffi.rs", "dotnet/autogen/NativeMethods.portaudio.g.cs")
         .unwrap();
 
     csbindgen::Builder::default()
@@ -49,9 +49,9 @@ fn main() {
         .csharp_namespace("PortAudio.Unsafe.Linux")
         .csharp_class_name("NativeMethodsAlsa")
         .csharp_import_namespace("PortAudio.Unsafe")
-        .csharp_dll_name("libportaudio")
+        .csharp_dll_name("portaudio")
         .csharp_class_accessibility("public")
-        .generate_to_file("src/pa_linux_alsa_ffi.rs", "dotnet/NativeMethods.pa_linux_alsa.g.cs")
+        .generate_to_file("src/pa_linux_alsa_ffi.rs", "dotnet/autogen/NativeMethods.pa_linux_alsa.g.cs")
         .unwrap();
 
     csbindgen::Builder::default()
@@ -62,8 +62,8 @@ fn main() {
         .csharp_namespace("PortAudio.Unsafe.Linux")
         .csharp_class_name("NativeMethodsPulsAudio")
         .csharp_import_namespace("PortAudio.Unsafe")
-        .csharp_dll_name("libportaudio")
+        .csharp_dll_name("portaudio")
         .csharp_class_accessibility("public")
-        .generate_to_file("src/pa_linux_pulseaudio_ffi.rs", "dotnet/NativeMethods.pa_linux_pulseaudio.g.cs")
+        .generate_to_file("src/pa_linux_pulseaudio_ffi.rs", "dotnet/autogen/NativeMethods.pa_linux_pulseaudio.g.cs")
         .unwrap();
 }

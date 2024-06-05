@@ -12,7 +12,7 @@ namespace PortAudio.Unsafe
 {
     public static unsafe partial class NativeMethods
     {
-        const string __DllName = "libportaudio";
+        const string __DllName = "portaudio";
 
 
 
