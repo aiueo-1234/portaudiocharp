@@ -5,17 +5,18 @@ namespace PortAudio.Wrapper;
 
 public class VersionInfo
 {
-    public int VersionMajor{get;}
-    public int VersionMinor{get;}
-    public int VersionSubMinor{get;}
-    public string VersionControlRevision{get;}
-    public string VersionText{get;}
+    public int VersionMajor { get; }
+    public int VersionMinor { get; }
+    public int VersionSubMinor { get; }
+    public string VersionControlRevision { get; }
+    public string VersionText { get; }
 
-    internal unsafe VersionInfo(PaVersionInfo* paVersionInfo){
-        VersionMajor=paVersionInfo->versionMajor;
-        VersionMinor=paVersionInfo->versionMinor;
-        VersionSubMinor=paVersionInfo->versionSubMinor;
+    internal unsafe VersionInfo(PaVersionInfo* paVersionInfo)
+    {
+        VersionMajor = paVersionInfo->versionMajor;
+        VersionMinor = paVersionInfo->versionMinor;
+        VersionSubMinor = paVersionInfo->versionSubMinor;
         VersionControlRevision = Helper.ConvertText(paVersionInfo->versionControlRevision);
-        VersionText=Helper.ConvertText(paVersionInfo->versionText);
+        VersionText = Helper.ConvertText(paVersionInfo->versionText);
     }
 }

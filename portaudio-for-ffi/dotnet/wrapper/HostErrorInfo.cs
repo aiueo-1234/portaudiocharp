@@ -6,13 +6,14 @@ namespace PortAudio.Wrapper;
 
 public struct HostErrorInfo
 {
-    public PaHostApiTypeId HostApiType{get;}
-    public CLong ErrorCode{get;}
-    public string ErrorText{get;}
+    public PaHostApiTypeId HostApiType { get; }
+    public CLong ErrorCode { get; }
+    public string ErrorText { get; }
 
-    internal unsafe HostErrorInfo(PaHostErrorInfo* paHostErrorInfo){
+    internal unsafe HostErrorInfo(PaHostErrorInfo* paHostErrorInfo)
+    {
         HostApiType = paHostErrorInfo->hostApiType;
         ErrorCode = paHostErrorInfo->errorCode;
-        ErrorText=Helper.ConvertText(paHostErrorInfo->errorText);
+        ErrorText = Helper.ConvertText(paHostErrorInfo->errorText);
     }
 }

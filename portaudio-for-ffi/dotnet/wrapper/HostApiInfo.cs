@@ -15,7 +15,7 @@ public class HostApiInfo
 
     internal unsafe HostApiInfo(PaHostApiInfo* paHostApiInfo)
     {
-        if ((nint)paHostApiInfo!=nint.Zero)
+        if ((nint)paHostApiInfo != nint.Zero)
         {
             StructVersion = paHostApiInfo->structVersion;
             Type = paHostApiInfo->type_;
@@ -24,12 +24,14 @@ public class HostApiInfo
             DefaultInputDevice = paHostApiInfo->defaultInputDevice;
             DefaultOutputDevice = paHostApiInfo->defaultOutputDevice;
         }
-        else{
-            Name="";
+        else
+        {
+            Name = "";
         }
     }
 
-    private HostApiInfo(){
-        Name="";
+    private HostApiInfo()
+    {
+        Name = "";
     }
 }

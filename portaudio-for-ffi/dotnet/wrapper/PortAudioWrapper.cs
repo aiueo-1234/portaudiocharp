@@ -15,33 +15,41 @@ public static class PortAudioWrapper
         return new VersionInfo(NativeMethods.Pa_GetVersionInfo());
     }
 
-    public static PaErrorCode Initialize(){
+    public static PaErrorCode Initialize()
+    {
         return (PaErrorCode)NativeMethods.Pa_Initialize();
     }
 
-    public static PaErrorCode Terminate(){
+    public static PaErrorCode Terminate()
+    {
         return (PaErrorCode)NativeMethods.Pa_Terminate();
     }
 
-    public static unsafe string GetErrorText(PaErrorCode errorCode){
+    public static unsafe string GetErrorText(PaErrorCode errorCode)
+    {
         return Helper.ConvertText(NativeMethods.Pa_GetErrorText((int)errorCode));
     }
 
-    public static unsafe HostApiInfo GetHostApiInfo(int hostApi){
+    public static unsafe HostApiInfo GetHostApiInfo(int hostApi)
+    {
         var paHostApiInfo = NativeMethods.Pa_GetHostApiInfo(hostApi);
-        if((nint)paHostApiInfo != nint.Zero){
+        if ((nint)paHostApiInfo != nint.Zero)
+        {
             return new HostApiInfo(paHostApiInfo);
         }
-        else{
+        else
+        {
             return HostApiInfo.Null;
         }
     }
 
-    public static int HostApiTypeIdToHostApiIndex(PaHostApiTypeId type){
+    public static int HostApiTypeIdToHostApiIndex(PaHostApiTypeId type)
+    {
         return NativeMethods.Pa_HostApiTypeIdToHostApiIndex(type);
     }
 
-    public static unsafe HostErrorInfo GetLastHostErrorInfo(){
+    public static unsafe HostErrorInfo GetLastHostErrorInfo()
+    {
         return new HostErrorInfo(NativeMethods.Pa_GetLastHostErrorInfo());
     }
 }
