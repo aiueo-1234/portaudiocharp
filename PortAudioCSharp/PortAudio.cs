@@ -1,13 +1,13 @@
 using PortAudio.Wrapper;
 namespace PortAudioCSharp;
 
-public class PortAudio : IDisposable
+public class PortAudioDevice : IDisposable
 {
     private bool _isDisposed = true;
     public void Initialize()
     {
         PortAudioWrapper.Initialize();
-        _isDisposed = true;
+        _isDisposed = false;
     }
 
     public void Dispose()
