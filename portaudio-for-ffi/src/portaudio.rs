@@ -93,41 +93,6 @@ extern "C" {
 }
 #[doc = " Error codes returned by PortAudio functions.\nNote that with the exception of paNoError, all PaErrorCodes are negative."]
 pub type PaError = ::std::os::raw::c_int;
-#[repr(i32)]
-#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
-pub enum PaErrorCode {
-    paNoError = 0,
-    paNotInitialized = -10000,
-    paUnanticipatedHostError = -9999,
-    paInvalidChannelCount = -9998,
-    paInvalidSampleRate = -9997,
-    paInvalidDevice = -9996,
-    paInvalidFlag = -9995,
-    paSampleFormatNotSupported = -9994,
-    paBadIODeviceCombination = -9993,
-    paInsufficientMemory = -9992,
-    paBufferTooBig = -9991,
-    paBufferTooSmall = -9990,
-    paNullCallback = -9989,
-    paBadStreamPtr = -9988,
-    paTimedOut = -9987,
-    paInternalError = -9986,
-    paDeviceUnavailable = -9985,
-    paIncompatibleHostApiSpecificStreamInfo = -9984,
-    paStreamIsStopped = -9983,
-    paStreamIsNotStopped = -9982,
-    paInputOverflowed = -9981,
-    paOutputUnderflowed = -9980,
-    paHostApiNotFound = -9979,
-    paInvalidHostApi = -9978,
-    paCanNotReadFromACallbackStream = -9977,
-    paCanNotWriteToACallbackStream = -9976,
-    paCanNotReadFromAnOutputOnlyStream = -9975,
-    paCanNotWriteToAnInputOnlyStream = -9974,
-    paIncompatibleStreamHostApi = -9973,
-    paBadBufferPtr = -9972,
-    paCanNotInitializeRecursively = -9971,
-}
 extern "C" {
     #[doc = " Translate the supplied PortAudio error code into a human readable\nmessage."]
     pub fn Pa_GetErrorText(errorCode: PaError) -> *const ::std::os::raw::c_char;
@@ -152,31 +117,8 @@ extern "C" {
     #[doc = " Retrieve the index of the default host API. The default host API will be\nthe lowest common denominator host API on the current platform and is\nunlikely to provide the best performance.\n\n@return A non-negative value ranging from 0 to (Pa_GetHostApiCount()-1)\nindicating the default host API index or, a PaErrorCode (which are always\nnegative) if PortAudio is not initialized or an error is encountered."]
     pub fn Pa_GetDefaultHostApi() -> PaHostApiIndex;
 }
-#[repr(u32)]
-#[doc = " Unchanging unique identifiers for each supported host API. This type\nis used in the PaHostApiInfo structure. The values are guaranteed to be\nunique and to never change, thus allowing code to be written that\nconditionally uses host API specific extensions.\n\nNew type ids will be allocated when support for a host API reaches\n\"public alpha\" status, prior to that developers should use the\npaInDevelopment type id.\n\n@see PaHostApiInfo"]
-#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
-pub enum PaHostApiTypeId {
-    paInDevelopment = 0,
-    paDirectSound = 1,
-    paMME = 2,
-    paASIO = 3,
-    paSoundManager = 4,
-    paCoreAudio = 5,
-    paOSS = 7,
-    paALSA = 8,
-    paAL = 9,
-    paBeOS = 10,
-    paWDMKS = 11,
-    paJACK = 12,
-    paWASAPI = 13,
-    paAudioScienceHPI = 14,
-    paAudioIO = 15,
-    paPulseAudio = 16,
-    paSndio = 17,
-}
 #[doc = " A structure containing information about a particular host API."]
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
 pub struct PaHostApiInfo {
     #[doc = " this is struct version 1"]
     pub structVersion: ::std::os::raw::c_int,
@@ -283,7 +225,6 @@ extern "C" {
 }
 #[doc = " Structure used to return information about a host error condition."]
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
 pub struct PaHostErrorInfo {
     #[doc = "< the host API which returned the error code"]
     pub hostApiType: PaHostApiTypeId,
@@ -645,14 +586,6 @@ fn bindgen_test_layout_PaStreamCallbackTimeInfo() {
 }
 #[doc = "Flag bit constants for the statusFlags to PaStreamCallback.\n\n@see paInputUnderflow, paInputOverflow, paOutputUnderflow, paOutputOverflow,\npaPrimingOutput"]
 pub type PaStreamCallbackFlags = ::std::os::raw::c_ulong;
-#[doc = "< Signal that the stream should continue invoking the callback and processing audio."]
-pub const PaStreamCallbackResult_paContinue: PaStreamCallbackResult = 0;
-#[doc = "< Signal that the stream should stop invoking the callback and finish once all output samples have played."]
-pub const PaStreamCallbackResult_paComplete: PaStreamCallbackResult = 1;
-#[doc = "< Signal that the stream should stop invoking the callback and finish as soon as possible."]
-pub const PaStreamCallbackResult_paAbort: PaStreamCallbackResult = 2;
-#[doc = "Allowable return values for the PaStreamCallback.\n@see PaStreamCallback"]
-pub type PaStreamCallbackResult = ::std::os::raw::c_uint;
 #[doc = "Functions of type PaStreamCallback are implemented by PortAudio clients.\nThey consume, process or generate audio in response to requests from an\nactive PortAudio stream.\n\nWhen a stream is running, PortAudio calls the stream callback periodically.\nThe callback function is responsible for processing buffers of audio samples\npassed via the input and output parameters.\n\nThe PortAudio stream callback runs at very high or real-time priority.\nIt is required to consistently meet its time deadlines. Do not allocate\nmemory, access the file system, call library functions or call other functions\nfrom the stream callback that may block or take an unpredictable amount of\ntime to complete.\n\nIn order for a stream to maintain glitch-free operation the callback\nmust consume and return audio data faster than it is recorded and/or\nplayed. PortAudio anticipates that each callback invocation may execute for\na duration approaching the duration of frameCount audio frames at the stream\nsample rate. It is reasonable to expect to be able to utilise 70% or more of\nthe available CPU time in the PortAudio callback. However, due to buffer size\nadaption and other factors, not all host APIs are able to guarantee audio\nstability under heavy CPU load with arbitrary fixed callback buffer sizes.\nWhen high callback CPU utilisation is required the most robust behavior\ncan be achieved by using paFramesPerBufferUnspecified as the\nPa_OpenStream() framesPerBuffer parameter.\n\n@param input and @param output are either arrays of interleaved samples or;\nif non-interleaved samples were requested using the paNonInterleaved sample\nformat flag, an array of buffer pointers, one non-interleaved buffer for\neach channel.\n\nThe format, packing and number of channels used by the buffers are\ndetermined by parameters to Pa_OpenStream().\n\n@param frameCount The number of sample frames to be processed by\nthe stream callback.\n\n@param timeInfo Timestamps indicating the ADC capture time of the first sample\nin the input buffer, the DAC output time of the first sample in the output buffer\nand the time the callback was invoked.\nSee PaStreamCallbackTimeInfo and Pa_GetStreamTime()\n\n@param statusFlags Flags indicating whether input and/or output buffers\nhave been inserted or will be dropped to overcome underflow or overflow\nconditions.\n\n@param userData The value of a user supplied pointer passed to\nPa_OpenStream() intended for storing synthesis data etc.\n\n@return\nThe stream callback should return one of the values in the\n::PaStreamCallbackResult enumeration. To ensure that the callback continues\nto be called, it should return paContinue (0). Either paComplete or paAbort\ncan be returned to finish stream processing, after either of these values is\nreturned the callback will not be called again. If paAbort is returned the\nstream will finish as soon as possible. If paComplete is returned, the stream\nwill continue until all buffers generated by the callback have been played.\nThis may be useful in applications such as soundfile players where a specific\nduration of output is required. However, it is not necessary to utilize this\nmechanism as Pa_StopStream(), Pa_AbortStream() or Pa_CloseStream() can also\nbe used to stop the stream. The callback must always fill the entire output\nbuffer irrespective of its return value.\n\n@see Pa_OpenStream, Pa_OpenDefaultStream\n\n@note With the exception of Pa_GetStreamCpuLoad() it is not permissible to call\nPortAudio API functions from within the stream callback."]
 pub type PaStreamCallback = ::std::option::Option<
     unsafe extern "C" fn(
