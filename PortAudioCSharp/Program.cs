@@ -3,7 +3,7 @@ using PortAudio.Wrapper;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-NativeLibrary.SetDllImportResolver(typeof(NativeMethods).Assembly, DllImportResolver);
+NativeLibrary.SetDllImportResolver(typeof(NativeConsts).Assembly, DllImportResolver);
 Console.WriteLine(PortAudioWrapper.GetVersionText());
 
 static IntPtr DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
