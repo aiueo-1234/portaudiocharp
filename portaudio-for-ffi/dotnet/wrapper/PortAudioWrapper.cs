@@ -43,7 +43,7 @@ public static class PortAudioWrapper
         return NativeMethods.Pa_GetDefaultHostApi();
     }
 
-    public static unsafe HostApiInfo? GetHostApiInfo(int hostApi)
+    public static unsafe HostApiInfo GetHostApiInfo(int hostApi)
     {
         var paHostApiInfo = NativeMethods.Pa_GetHostApiInfo(hostApi);
         if ((nint)paHostApiInfo != nint.Zero)
@@ -52,7 +52,7 @@ public static class PortAudioWrapper
         }
         else
         {
-            return null;
+            return default;
         }
     }
 
