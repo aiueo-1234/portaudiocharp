@@ -8,7 +8,7 @@ public ref struct HostApiInfo
 {
     public int StructVersion { get; }
     public PaHostApiTypeId Type { get; }
-    public string Name { get; }
+    public ReadOnlySpan<byte> Name { get; }
     public int DeviceCount { get; }
     public int DefaultInputDevice { get; }
     public int DefaultOutputDevice { get; }
@@ -19,7 +19,7 @@ public ref struct HostApiInfo
         {
             StructVersion = paHostApiInfo->structVersion;
             Type = paHostApiInfo->type_;
-            Name = Helper.ConvertText(paHostApiInfo->name);
+            Name = Helper.ConvertROS(paHostApiInfo->name);
             DeviceCount = paHostApiInfo->deviceCount;
             DefaultInputDevice = paHostApiInfo->defaultInputDevice;
             DefaultOutputDevice = paHostApiInfo->defaultOutputDevice;
