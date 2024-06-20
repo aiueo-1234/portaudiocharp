@@ -1,10 +1,8 @@
 using System;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.Unicode;
 
-namespace PortAudio.Utils;
+namespace PortAudioCSharp.Utils;
 
 internal static class Helper
 {

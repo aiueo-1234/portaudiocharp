@@ -1,7 +1,7 @@
-using PortAudio.Exceptions;
-using PortAudio.Wrapper;
+using PortAudioCSharp.Exceptions;
+using PortAudioCSharp.Wrapper;
 
-namespace PortAudio;
+namespace PortAudioCSharp;
 
 public class PortAudioDevice
 {

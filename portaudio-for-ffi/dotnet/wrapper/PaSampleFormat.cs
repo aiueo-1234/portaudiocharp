@@ -1,5 +1,5 @@
 // TODO:自動生成
-namespace PortAudio.Wrapper;
+namespace PortAudioCSharp.Wrapper;
 
 public enum PaSampleFormat : ulong
 {

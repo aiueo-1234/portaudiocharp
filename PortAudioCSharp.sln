@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortAudioCSharp", "PortAudi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "portaudio-for-ffi", "portaudio-for-ffi", "{9D4CA01F-F239-44C9-A7CC-6D868D28E431}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortAudio.Unsafe", "portaudio-for-ffi\dotnet\PortAudio.Unsafe.csproj", "{4191183E-84BF-434F-A813-6B585E6F281A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortAudioCSharp.Unsafe", "portaudio-for-ffi\dotnet\PortAudioCSharp.Unsafe.csproj", "{4191183E-84BF-434F-A813-6B585E6F281A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

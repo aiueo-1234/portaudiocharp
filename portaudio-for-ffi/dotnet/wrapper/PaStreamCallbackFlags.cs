@@ -1,7 +1,7 @@
 // TODO 自動生成
 using System;
 
-namespace PortAudio.Wrapper;
+namespace PortAudioCSharp.Wrapper;
 
 [Flags]
 public enum PaStreamCallbackFlags : ulong
