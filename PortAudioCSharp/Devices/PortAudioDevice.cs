@@ -25,16 +25,22 @@ public class PortAudioDevice
         }
         var deviceInfo = PortAudioWrapper.GetDeviceInfo(deviceIndex);
         Name = UnicodeEncoding.Default.GetString(deviceInfo.Name);
-        MaxInputChannels=deviceInfo.MaxInputChannels;
-        MaxOutputChannels=deviceInfo.MaxOutputChannels;
-        DefaultLowInputLatency=deviceInfo.DefaultLowInputLatency;
-        DefaultLowOutputLatency=deviceInfo.DefaultLowOutputLatency;
-        DefaultHighInputLatency=deviceInfo.DefaultHighInputLatency;
-        DefaultHighOutputLatency=deviceInfo.DefaultHighOutputLatency;
+        MaxInputChannels = deviceInfo.MaxInputChannels;
+        MaxOutputChannels = deviceInfo.MaxOutputChannels;
+        DefaultLowInputLatency = deviceInfo.DefaultLowInputLatency;
+        DefaultLowOutputLatency = deviceInfo.DefaultLowOutputLatency;
+        DefaultHighInputLatency = deviceInfo.DefaultHighInputLatency;
+        DefaultHighOutputLatency = deviceInfo.DefaultHighOutputLatency;
         DefaultSampleRate = deviceInfo.DefaultSampleRate;
     }
 
-    public static IEnumerable<PortAudioDevice> GetAllDevice(HostApi hostApi){
-        return Enumerable.Range(0,hostApi.DeviceCount).Select(i=>new PortAudioDevice(i,hostApi));
+    public static IEnumerable<PortAudioDevice> GetAllDevice(HostApi hostApi)
+    {
+        var apiIndex = PortAudioWrapper.HostApiTypeIdToHostApiIndex(hostApi.Type);
+        return Enumerable.Range(0, hostApi.DeviceCount).Select(i =>
+        {
+            var deviceIndex = PortAudioWrapper.HostApiDeviceIndexToDeviceIndex(apiIndex, i);
+            return new PortAudioDevice(deviceIndex, hostApi);
+        });
     }
 }
