@@ -3,11 +3,23 @@ using PortAudioCSharp.Wrapper;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using PortAudioCSharp;
+using PortAudioCSharp.Devices;
 
 NativeLibrary.SetDllImportResolver(typeof(NativeConsts).Assembly, DllImportResolver);
 Console.WriteLine(PortAudioWrapper.GetVersionText());
 
 using var service = new PortAudioService();
+
+var hostApi = new HostApi();
+Console.WriteLine(hostApi.Name);
+
+Console.WriteLine(hostApi.DefaultInputDevice!=null?hostApi.DefaultInputDevice.Name:"None");
+Console.WriteLine(hostApi.DefaultOutputDevice!=null?hostApi.DefaultOutputDevice.Name:"None");
+
+Console.WriteLine($"{hostApi.Name}のデバイス一覧");
+foreach(var device in PortAudioDevice.GetAllDevice(hostApi)){
+    Console.WriteLine(device.Name);
+}
 
 static IntPtr DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
 {

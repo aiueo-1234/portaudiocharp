@@ -19,6 +19,10 @@ public sealed class PortAudioService : IDisposable
         }
     }
 
+    public PortAudioService(){
+        Initialize();
+    }
+
     internal void Initialize()
     {
         PortAudioException.ThrowIfError(PortAudioWrapper.Initialize());

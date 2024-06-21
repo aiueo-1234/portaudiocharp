@@ -87,6 +87,16 @@ public static class PortAudioWrapper
 
     public static unsafe DeviceInfo GetDeviceInfo(int deviceIndex)
     {
-        return new DeviceInfo(NativeMethods.Pa_GetDeviceInfo(deviceIndex));
+        var info = NativeMethods.Pa_GetDeviceInfo(deviceIndex);
+        if ((nint)info == nint.Zero)
+        {
+            return default;
+        }
+        return new DeviceInfo(info);
+    }
+
+    public static int GetDeviceCount()
+    {
+        return NativeMethods.Pa_GetDeviceCount();
     }
 }
