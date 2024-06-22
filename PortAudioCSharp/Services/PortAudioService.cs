@@ -1,9 +1,10 @@
 using PortAudioCSharp.Exceptions;
+using PortAudioCSharp.Services.Contracts;
 using PortAudioCSharp.Wrapper;
 
-namespace PortAudioCSharp;
+namespace PortAudioCSharp.Services;
 
-public sealed class PortAudioService : IDisposable
+public sealed class PortAudioService : IPortAudioService
 {
     private bool _isInitialized = false;
 
@@ -19,8 +20,12 @@ public sealed class PortAudioService : IDisposable
         }
     }
 
-    public PortAudioService(){
+    public HostApi DefaultHostApi { get; }
+
+    public PortAudioService()
+    {
         Initialize();
+        DefaultHostApi = new HostApi();
     }
 
     internal void Initialize()
