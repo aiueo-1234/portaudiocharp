@@ -1,4 +1,4 @@
-﻿using PortAudioCSharp.Exceptions;
+using PortAudioCSharp.Exceptions;
 using PortAudioCSharp.Wrapper;
 
 namespace PortAudioCSharp;
