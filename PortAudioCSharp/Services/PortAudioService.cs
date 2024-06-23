@@ -57,4 +57,14 @@ public sealed class PortAudioService : IPortAudioService
         }
         return Enumerable.Range(0, avaliableApiCount).Select(x => new HostApi(x, false));
     }
+
+    public IEnumerable<PortAudioDevice> GetAllDevice()
+    {
+        var avaliableDeviceCount = PortAudioWrapper.GetDeviceCount();
+        if (avaliableDeviceCount < 0)
+        {
+            PortAudioException.ThrowIfError(avaliableDeviceCount);
+        }
+        return Enumerable.Range(0, avaliableDeviceCount).Select(x => new PortAudioDevice(x));
+    }
 }

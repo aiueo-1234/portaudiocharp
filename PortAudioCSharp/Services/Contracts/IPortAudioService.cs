@@ -9,4 +9,5 @@ public interface IPortAudioService : IDisposable
     public PortAudioDevice DefaultInputDevice { get; }
     public PortAudioDevice DefaultOutputDevice { get; }
     public IEnumerable<HostApi> GetAllHostApi();
+    public IEnumerable<PortAudioDevice> GetAllDevice();
 }
