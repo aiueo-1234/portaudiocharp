@@ -8,6 +8,7 @@ namespace PortAudioCSharp;
 
 public class HostApi
 {
+    private int _hostApiIndex;
     public PaHostApiTypeId Type { get; }
     public string Name { get; }
     public int DeviceCount { get; }
@@ -20,7 +21,7 @@ public class HostApi
 
     public HostApi(int apiIndex) : this(apiIndex, true) { }
 
-    private HostApi(int apiIndex, bool chakeError)
+    internal HostApi(int apiIndex, bool chakeError)
     {
         if (chakeError)
         {
@@ -36,7 +37,7 @@ public class HostApi
                 throw new ArgumentOutOfRangeException(nameof(apiIndex));
             }
         }
-
+        _hostApiIndex = apiIndex;
         var apiInfo = PortAudioWrapper.GetHostApiInfo(apiIndex);
         Type = apiInfo.Type;
         Name = UnicodeEncoding.Default.GetString(apiInfo.Name);
@@ -45,13 +46,12 @@ public class HostApi
         DefaultOutputDevice = apiInfo.DefaultOutputDevice >= 0 ? new PortAudioDevice(apiInfo.DefaultOutputDevice, this) : null;
     }
 
-    public static IEnumerable<HostApi> GetAllHostApi()
+    public IEnumerable<PortAudioDevice> GetAllDevice()
     {
-        var avaliableApiCount = PortAudioWrapper.GetHostApiCount();
-        if (avaliableApiCount < 0)
+        return Enumerable.Range(0, DeviceCount).Select(i =>
         {
-            PortAudioException.Throw((PaErrorCode)avaliableApiCount);
-        }
-        return Enumerable.Range(0, avaliableApiCount).Select(x => new HostApi(x, false));
+            var deviceIndex = PortAudioWrapper.HostApiDeviceIndexToDeviceIndex(_hostApiIndex, i);
+            return new PortAudioDevice(deviceIndex, this);
+        });
     }
 }

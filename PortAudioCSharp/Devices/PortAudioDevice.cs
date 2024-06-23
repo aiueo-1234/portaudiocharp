@@ -5,6 +5,7 @@ namespace PortAudioCSharp.Devices;
 
 public class PortAudioDevice
 {
+    private int _deviceIndex = (int)PaDeviceIndex.paNoDevice;
     public string Name { get; }
     public HostApi HostApi { get; }
 
@@ -18,11 +19,12 @@ public class PortAudioDevice
 
     public PortAudioDevice(int deviceIndex, HostApi hostApi)
     {
-        HostApi = hostApi;
-        if (deviceIndex < 0 || deviceIndex > PortAudioWrapper.GetDeviceCount())
+        if (deviceIndex < 0 || deviceIndex >= PortAudioWrapper.GetDeviceCount())
         {
             throw new ArgumentOutOfRangeException(nameof(deviceIndex));
         }
+        _deviceIndex = deviceIndex;
+        HostApi = hostApi;
         var deviceInfo = PortAudioWrapper.GetDeviceInfo(deviceIndex);
         Name = UnicodeEncoding.Default.GetString(deviceInfo.Name);
         MaxInputChannels = deviceInfo.MaxInputChannels;
@@ -34,13 +36,22 @@ public class PortAudioDevice
         DefaultSampleRate = deviceInfo.DefaultSampleRate;
     }
 
-    public static IEnumerable<PortAudioDevice> GetAllDevice(HostApi hostApi)
+    public PortAudioDevice(int deviceIndex)
     {
-        var apiIndex = PortAudioWrapper.HostApiTypeIdToHostApiIndex(hostApi.Type);
-        return Enumerable.Range(0, hostApi.DeviceCount).Select(i =>
+        if (deviceIndex < 0 || deviceIndex >= PortAudioWrapper.GetDeviceCount())
         {
-            var deviceIndex = PortAudioWrapper.HostApiDeviceIndexToDeviceIndex(apiIndex, i);
-            return new PortAudioDevice(deviceIndex, hostApi);
-        });
+            throw new ArgumentOutOfRangeException(nameof(deviceIndex));
+        }
+        _deviceIndex = deviceIndex;
+        var deviceInfo = PortAudioWrapper.GetDeviceInfo(deviceIndex);
+        Name = UnicodeEncoding.Default.GetString(deviceInfo.Name);
+        MaxInputChannels = deviceInfo.MaxInputChannels;
+        MaxOutputChannels = deviceInfo.MaxOutputChannels;
+        DefaultLowInputLatency = deviceInfo.DefaultLowInputLatency;
+        DefaultLowOutputLatency = deviceInfo.DefaultLowOutputLatency;
+        DefaultHighInputLatency = deviceInfo.DefaultHighInputLatency;
+        DefaultHighOutputLatency = deviceInfo.DefaultHighOutputLatency;
+        DefaultSampleRate = deviceInfo.DefaultSampleRate;
+        HostApi = new HostApi(deviceInfo.HostApi, false);
     }
 }
