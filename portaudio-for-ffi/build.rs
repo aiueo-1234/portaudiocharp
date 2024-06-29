@@ -13,7 +13,7 @@ fn main() {
         .default_enum_style(bindgen::EnumVariation::Rust {
             non_exhaustive: false,
         })
-        .allowlist_item("PaHostApiTypeId|PaErrorCode|PaStreamCallbackResult")
+        .allowlist_item("PaHostApiTypeId|PaErrorCode|PaStreamCallbackResult|paFramesPerBufferUnspecified")
         .generate()
         .unwrap()
         .write_to_file("src/portaudio_enum.rs")
@@ -70,7 +70,7 @@ fn main() {
             "dotnet/autogen/NativeConsts.portaudio_enum.g.cs",
         )
         .unwrap();
-    
+
     // alsa部分のC#用ffiコード生成
     csbindgen::Builder::default()
         .input_bindgen_file("src/pa_linux_alsa.rs")
