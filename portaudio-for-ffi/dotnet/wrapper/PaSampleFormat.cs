@@ -1,7 +1,7 @@
 // TODO:自動生成
 namespace PortAudioCSharp.Wrapper;
 
-public enum PaSampleFormat : ulong
+public enum PaSampleFormat : uint
 {
     paFloat32 = 0x00000001,
     paInt32 = 0x00000002,

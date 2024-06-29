@@ -4,7 +4,7 @@ using System;
 namespace PortAudioCSharp.Wrapper;
 
 [Flags]
-public enum PaStreamCallbackFlags : ulong
+public enum PaStreamCallbackFlags : uint
 {
     paInputUnderflow = 0x00000001,
     paInputOverflow = 0x00000002,
