@@ -15,7 +15,7 @@ public ref struct HostApiInfo
 
     internal unsafe HostApiInfo(PaHostApiInfo* paHostApiInfo)
     {
-        if ((nint)paHostApiInfo != nint.Zero)
+        if ((nint)(&paHostApiInfo) != nint.Zero)
         {
             StructVersion = paHostApiInfo->structVersion;
             Type = paHostApiInfo->type_;

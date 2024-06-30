@@ -20,15 +20,22 @@ public ref struct DeviceInfo
 
     internal unsafe DeviceInfo(PaDeviceInfo* paDeviceInfo)
     {
-        StructVersion = paDeviceInfo->structVersion;
-        Name = Helper.ConvertROS(paDeviceInfo->name);
-        HostApi = paDeviceInfo->hostApi;
-        MaxInputChannels = paDeviceInfo->maxInputChannels;
-        MaxOutputChannels = paDeviceInfo->maxOutputChannels;
-        DefaultLowInputLatency = paDeviceInfo->defaultLowInputLatency;
-        DefaultLowOutputLatency = paDeviceInfo->defaultLowOutputLatency;
-        DefaultHighInputLatency = paDeviceInfo->defaultHighInputLatency;
-        DefaultHighOutputLatency = paDeviceInfo->defaultHighOutputLatency;
-        DefaultSampleRate = paDeviceInfo->defaultSampleRate;
+        if ((nint)(&paDeviceInfo) == nint.Zero)
+        {
+            StructVersion = paDeviceInfo->structVersion;
+            Name = Helper.ConvertROS(paDeviceInfo->name);
+            HostApi = paDeviceInfo->hostApi;
+            MaxInputChannels = paDeviceInfo->maxInputChannels;
+            MaxOutputChannels = paDeviceInfo->maxOutputChannels;
+            DefaultLowInputLatency = paDeviceInfo->defaultLowInputLatency;
+            DefaultLowOutputLatency = paDeviceInfo->defaultLowOutputLatency;
+            DefaultHighInputLatency = paDeviceInfo->defaultHighInputLatency;
+            DefaultHighOutputLatency = paDeviceInfo->defaultHighOutputLatency;
+            DefaultSampleRate = paDeviceInfo->defaultSampleRate;
+        }
+        else
+        {
+            throw new ArgumentNullException(nameof(paDeviceInfo));
+        }
     }
 }
