@@ -1,5 +1,5 @@
-using PortAudioCSharp.Wrapper;
 using System.Text;
+using PortAudioCSharp.Wrapper;
 
 namespace PortAudioCSharp.Devices;
 

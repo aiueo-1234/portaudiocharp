@@ -17,12 +17,15 @@ internal static class Helper
         return text;
     }
 
-    internal static string ConvertText(ReadOnlySpan<byte> cText){
+    internal static string ConvertText(ReadOnlySpan<byte> cText)
+    {
         return Encoding.Unicode.GetString(cText);
     }
 
-    internal static unsafe ReadOnlySpan<byte> ConvertROS(byte* cText){
-        if((nint)cText==nint.Zero){
+    internal static unsafe ReadOnlySpan<byte> ConvertROS(byte* cText)
+    {
+        if ((nint)cText == nint.Zero)
+        {
             return default;
         }
         int count = 0;
